@@ -38,11 +38,7 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 		}
 		
 		
-		for(int j = 0; j < numeroCruzamento; j++) {
-			novaGeracao.get(j).imprimiGenes();
-
-		}
-		 
+		
 		
 		 
 		  
