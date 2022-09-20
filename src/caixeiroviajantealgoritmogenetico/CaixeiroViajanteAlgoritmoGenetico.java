@@ -2,10 +2,8 @@ package caixeiroviajantealgoritmogenetico;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class CaixeiroViajanteAlgoritmoGenetico {
 	
@@ -27,6 +25,7 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 		 Cruzamento cruzamento = new Cruzamento(numeroCruzamento);
 		 Mutacao mutacao = new Mutacao();
 		 Avaliacao avaliacao = new Avaliacao();
+		 Selecao selecao = new Selecao();
 		 Grafo grafo = new Grafo();
 		 for(int i = 0; i< kIndividuos; i++) {
 			 Individuo individuo = new Individuo(numeroGenes); 
@@ -61,22 +60,9 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 				//selecaoIndividuo.add(novaGeracao.get(j));
 			}
 		}
+		/*Seleção de Individuos - Elitismo */
+		selecaoIndividuo = selecao.selecionaExtermina(novaGeracao, custo, individuosSelecionados);
 		
-		Map<Integer, Integer> custoOrdenado = custo.entrySet()
-		        .stream()
-		        .sorted(Map.Entry.comparingByValue())
-		        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-		
-
-        for (Integer key : custoOrdenado.keySet()) {
-        	if(individuosSelecionados <= 200) {
-        		selecaoIndividuo.add(novaGeracao.get(key));
-        		//novaGeracao.get(key);
-        		individuosSelecionados++;
-        	}
-        }
-        
-
 	 
 	}
 }
