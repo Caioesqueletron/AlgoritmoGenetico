@@ -13,7 +13,7 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 			
 		 int kIndividuos = 1000;
 		 int numeroGenes = 5;
-		 int posicaoIndividuo1 = 0, posicaoIndividuo2 = 0,j;
+		 int posicaoIndividuo1 = 0, posicaoIndividuo2 = 0,j, individuosSelecionados = 0;
 		 double percentualCruzamento = 0.2;
 		 double numeroCruzamento = Math.round(percentualCruzamento * kIndividuos);
 		 Random random = new Random();
@@ -47,10 +47,8 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 		/* mutação dos novos individuos gerados */
 		
 		for(j = 0; j<novaGeracao.size(); j++) {
-			//novaGeracao.get(j).imprimiGenes();
 			Individuo teste = mutacao.fazerMutacao(novaGeracao.get(j));
 			novaGeracao.set(j, teste);
-			//novaGeracao.get(j).imprimiGenes();
 		}
 	
 		/*Avaliação dos individuos */
@@ -60,7 +58,7 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 		for(j = 0; j<novaGeracao.size(); j++) {
 			if(avaliacao.checarIndividuo(novaGeracao.get(j), cidades)) {
 				custo.put(j, novaGeracao.get(j).getCusto());
-				selecaoIndividuo.add(novaGeracao.get(j));
+				//selecaoIndividuo.add(novaGeracao.get(j));
 			}
 		}
 		
@@ -68,8 +66,17 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 		        .stream()
 		        .sorted(Map.Entry.comparingByValue())
 		        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-	
 		
+
+        for (Integer key : custoOrdenado.keySet()) {
+        	if(individuosSelecionados <= 200) {
+        		selecaoIndividuo.add(novaGeracao.get(key));
+        		//novaGeracao.get(key);
+        		individuosSelecionados++;
+        	}
+        }
+        
+
 	 
 	}
 }
