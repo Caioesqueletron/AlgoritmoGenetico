@@ -5,10 +5,12 @@ import java.util.Random;
 
 public class Individuo {
 	private int tamanho;
+	private int custo;
 	private int[] genes;
 	
 	public Individuo(int tamanho) {
 		this.tamanho = tamanho;
+		this.custo = Integer.MAX_VALUE;
 		this.genes = new int[this.getTamanho()];
 		for(int i = 0; i < tamanho; i++) {
 			this.genes[i] = -1;
@@ -56,6 +58,14 @@ public class Individuo {
 		}
 		
 		System.out.println(genes);
+	}
+
+	public int getCusto() {
+		return custo;
+	}
+
+	public void setCusto(int custo) {
+		this.custo = custo;
 	}
 		
 

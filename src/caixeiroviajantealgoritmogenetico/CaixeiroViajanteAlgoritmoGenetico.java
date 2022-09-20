@@ -1,7 +1,11 @@
 package caixeiroviajantealgoritmogenetico;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class CaixeiroViajanteAlgoritmoGenetico {
 	
@@ -16,6 +20,9 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 
 		 ArrayList<Individuo> populacao = new ArrayList<Individuo>();	
 		 ArrayList<Individuo> novaGeracao = new ArrayList<Individuo>();	
+		 ArrayList<Individuo> selecaoIndividuo = new ArrayList<Individuo>();
+		 Map<Integer, Integer> custo = new HashMap<Integer, Integer>();
+
 
 		 Cruzamento cruzamento = new Cruzamento(numeroCruzamento);
 		 Mutacao mutacao = new Mutacao();
@@ -34,12 +41,9 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 			posicaoIndividuo2 = random.nextInt(kIndividuos);
 			Individuo individuo1 = populacao.get(posicaoIndividuo1);
 			Individuo individuo2 = populacao.get(posicaoIndividuo2);
-		   // individuo1.imprimiGenes();
-		    //individuo2.imprimiGenes();
-		    novaGeracao.add(cruzamento.fazerCruzamento(individuo1,individuo2,numeroGenes));
+			novaGeracao.add(cruzamento.fazerCruzamento(individuo1,individuo2,numeroGenes));
 
 		}
-		System.out.println(novaGeracao.size());
 		/* mutação dos novos individuos gerados */
 		
 		for(j = 0; j<novaGeracao.size(); j++) {
@@ -52,12 +56,19 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 		/*Avaliação dos individuos */
 		
 		int[][] cidades = grafo.lerGrafo();
-		boolean teste;
 		
 		for(j = 0; j<novaGeracao.size(); j++) {
-			teste = avaliacao.checarIndividuo(novaGeracao.get(j), cidades);
-			System.out.println(teste);
+			if(avaliacao.checarIndividuo(novaGeracao.get(j), cidades)) {
+				custo.put(j, novaGeracao.get(j).getCusto());
+				selecaoIndividuo.add(novaGeracao.get(j));
+			}
 		}
+		
+		Map<Integer, Integer> custoOrdenado = custo.entrySet()
+		        .stream()
+		        .sorted(Map.Entry.comparingByValue())
+		        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+	
 		
 	 
 	}
