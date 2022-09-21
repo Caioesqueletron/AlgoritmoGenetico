@@ -16,7 +16,7 @@ public class Selecao {
 		
 
         for (Integer key : custoOrdenado.keySet()) {
-        	if(individuosSelecionados <= 200) {
+        	if(individuosSelecionados <= 20) {
         		selecionaIndividuo.add(novaGeracao.get(key));
         		//novaGeracao.get(key);
         		individuosSelecionados++;

@@ -17,7 +17,7 @@ public class Avaliacao {
 			if(cidades[posicaoI][posicaoJ] > 0) {
 				custo += cidades[posicaoI][posicaoJ];
 				nVertices++;
-			}if(nVertices == 4) {
+			}if(nVertices == 9) {
 				if(cidades[posicaoJ][posicaoInicial] > 0) {
 					custo += cidades[posicaoJ][posicaoInicial];
 					valido = true;

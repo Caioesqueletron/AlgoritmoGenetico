@@ -7,7 +7,7 @@ public class Grafo {
 	public int[][] lerGrafo(){
 		 
         FileManager fileManager = new FileManager();
-        ArrayList<String> text = fileManager.stringReader("./data/Teste.txt");
+        ArrayList<String> text = fileManager.stringReader("./data/Teste_2.txt");
         
          int[][] graph = null;
 		 int nVertex = 0;

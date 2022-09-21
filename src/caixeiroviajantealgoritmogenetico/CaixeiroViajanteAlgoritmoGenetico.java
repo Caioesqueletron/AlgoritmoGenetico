@@ -9,8 +9,8 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 	
 	public static void main(String[] args) {
 			
-		 int kIndividuos = 1000;
-		 int numeroGenes = 5;
+		 int kIndividuos = 10000;
+		 int numeroGenes = 10;
 		 int posicaoIndividuo1 = 0, posicaoIndividuo2 = 0,j, individuosSelecionados = 0, nIteracoces = 0;
 		 double percentualCruzamento = 0.2;
 		 double numeroCruzamento = Math.round(percentualCruzamento * kIndividuos);
@@ -26,7 +26,7 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 			 
 		 }
 		 
-		 while(nIteracoces <= 3) {
+		 while(nIteracoces <= 2000) {
 			 Cruzamento cruzamento = new Cruzamento(numeroCruzamento);
 			 Mutacao mutacao = new Mutacao();
 			 Avaliacao avaliacao = new Avaliacao();
@@ -76,6 +76,7 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 					 
 					 
 				 }
+				 System.out.println(selecaoIndividuo.get(0).getCusto());
 				
 				nIteracoces++;
 				
