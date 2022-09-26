@@ -11,9 +11,11 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 			
 		 int kIndividuos = 10000;
 		 int numeroGenes = 10;
-		 int posicaoIndividuo1 = 0, posicaoIndividuo2 = 0,j, individuosSelecionados = 0, nIteracoces = 0;
-		 double percentualCruzamento = 0.2;
+		 int posicaoIndividuo1 = 0, posicaoIndividuo2 = 0,j, individuosSelecionados = 0, nGeracoes = 0;
+		 double percentualCruzamento = 0.80;
+		 double percentualMutacao = 0.05;
 		 double numeroCruzamento = Math.round(percentualCruzamento * kIndividuos);
+		 double numeroMutacao = Math.round(percentualMutacao * kIndividuos);
 		 Random random = new Random();
 
 		 ArrayList<Individuo> populacao = new ArrayList<Individuo>();	
@@ -26,7 +28,7 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 			 
 		 }
 		 
-		 while(nIteracoces <= 2000) {
+		 while(nGeracoes <= 2000) {
 			 Cruzamento cruzamento = new Cruzamento(numeroCruzamento);
 			 Mutacao mutacao = new Mutacao();
 			 Avaliacao avaliacao = new Avaliacao();
@@ -47,10 +49,11 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 
 				}
 				/* mutação dos novos individuos gerados */
-				
-				for(j = 0; j<novaGeracao.size(); j++) {
-					Individuo teste = mutacao.fazerMutacao(novaGeracao.get(j));
-					novaGeracao.set(j, teste);
+				int individuoPosicao = 0;
+				for(j = 0; j<numeroMutacao; j++) {
+					individuoPosicao = random.nextInt(novaGeracao.size()-1);
+					Individuo mutado = mutacao.fazerMutacao(novaGeracao.get(individuoPosicao));
+					novaGeracao.set(individuoPosicao, mutado);
 				}
 			
 				/*Avaliação dos individuos */
@@ -65,20 +68,21 @@ public class CaixeiroViajanteAlgoritmoGenetico {
 				}
 				/*Seleção de Individuos - Elitismo */
 				selecaoIndividuo = selecao.selecionaExtermina(novaGeracao, custo, individuosSelecionados);
+				populacao = new ArrayList<Individuo>();	
 				 for(int i = 0; i< kIndividuos; i++) {
 					 if(i < selecaoIndividuo.size()) {
-						 populacao.set(i, selecaoIndividuo.get(i));
+						 populacao.add(selecaoIndividuo.get(i));
 					 }else {
 						 Individuo individuo = new Individuo(numeroGenes); 
 						 individuo.criarIndividuo();
-						 populacao.set(i,individuo);
+						 populacao.add(individuo);
 					 }
 					 
 					 
 				 }
 				 System.out.println(selecaoIndividuo.get(0).getCusto());
 				
-				nIteracoces++;
+				nGeracoes++;
 				
 		 }
 		 

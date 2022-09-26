@@ -17,7 +17,7 @@ public class Avaliacao {
 			if(cidades[posicaoI][posicaoJ] > 0) {
 				custo += cidades[posicaoI][posicaoJ];
 				nVertices++;
-			}if(nVertices == 9) {
+			}if(nVertices == individuo.getTamanho()-1) {
 				if(cidades[posicaoJ][posicaoInicial] > 0) {
 					custo += cidades[posicaoJ][posicaoInicial];
 					valido = true;
