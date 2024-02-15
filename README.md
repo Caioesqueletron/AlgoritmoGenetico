@@ -1,7 +1,7 @@
 <h1 align="center">
 Algoritmo Genético
 </h1>
-<img src="https://github.com/Caioesqueletron/AlgoritmoGenetico/assets/54816901/9b00ffff-025c-4a46-b783-45fa3615d6f8"/>
+<img width="100%" src="https://github.com/Caioesqueletron/AlgoritmoGenetico/assets/54816901/9b00ffff-025c-4a46-b783-45fa3615d6f8"/>
 
 <hr>
 
